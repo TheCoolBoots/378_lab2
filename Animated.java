@@ -15,6 +15,7 @@ public class Animated extends Actor
     protected String rootImgFP;
     protected int numFrames;
     protected int moveSpeed;
+    private int moveDirection;
     
     public Animated(){
                 
