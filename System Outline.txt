@@ -23,6 +23,7 @@ Target class extends Character: 	// the goal that zombies are trying to get to
 	
 Animated:
 	private int direction		// 0 = up, 1 = right, 2 = down, 3 = left
+	public bool moving = false
 	Animated()
 	getNextImage()
 	setDirection(direction)
