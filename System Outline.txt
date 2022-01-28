@@ -1,0 +1,57 @@
+Player class extends Character: 
+	Player()
+	shoot()
+	melee()
+	act()
+	
+Projectile:
+	private static shootSound
+	Projectile()
+	act()
+	
+Zombie class extends Animated:
+	private static Player p
+	private static Target t
+	Zombie()
+	getNearestTarget(p, t)
+	getNextStep()
+	act()
+	
+Target class extends Character: 	// the goal that zombies are trying to get to
+	Target()
+	act()
+	
+Animated:
+	private int direction		// 0 = up, 1 = right, 2 = down, 3 = left
+	Animated(str imgRootName, int numImages, int initialDirection, GreenfootSound hitSound, GreenfootSound deathSound)
+	getNextImage()
+	setDirection(direction)
+	playHitSound()
+	playDeathSound()
+	act()
+	
+Character extends Animated:
+	list voicelines
+	talk()		// for speech bubbles
+	act()
+	
+ScoreTracker:
+	public static int score
+	public static int lives
+	
+World:
+	int spawnFrequency
+	private static Player p
+	private static Target t
+	World()
+	spawnZombie(x, y, p, t)		// have them spawn right outside the window
+	updateScore()
+	act()					// dont have to do spawn animation
+	
+	
+Window size = __ by __ 		// fill this in
+
+Zombie size = 20 by 30 ish
+	
+	
+	
