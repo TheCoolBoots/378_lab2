@@ -23,7 +23,7 @@ Target class extends Character: 	// the goal that zombies are trying to get to
 	
 Animated:
 	private int direction		// 0 = up, 1 = right, 2 = down, 3 = left
-	Animated(str imgRootName, int numImages, int initialDirection, GreenfootSound hitSound, GreenfootSound deathSound)
+	Animated()
 	getNextImage()
 	setDirection(direction)
 	playHitSound()
