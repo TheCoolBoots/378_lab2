@@ -35,7 +35,7 @@ public class Animated extends Actor
             for(int dir = 0; dir<4; dir++){
                 String key = String.format("%x%x", dir, frame);
                 String fileName = String.format("%s%o%o.png", rootImgFP, dir, frame);
-                System.out.println(key + " " + fileName);
+                // System.out.println(key + " " + fileName);
                 images.put(key, new GreenfootImage(fileName));
             }
         }

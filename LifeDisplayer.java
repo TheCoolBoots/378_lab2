@@ -8,8 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class LifeDisplayer extends Actor
 {
-    private int value = 0;
+    private int value = 3;
     private GreenfootImage[] images;
+    private boolean firstTime = true;
     
     public LifeDisplayer(GreenfootImage[] images){
         this.images = images;
@@ -20,6 +21,16 @@ public class LifeDisplayer extends Actor
     }
     
     public void act(){
-        setImage(images[value-1]);
+        if(value < 1){
+            if(firstTime){
+                firstTime = false;
+                System.out.println("GAME OVER");
+                setImage(images[0]);
+            }
+        } 
+        else{
+            setImage(images[value]);
+        }
+            
     }
 }

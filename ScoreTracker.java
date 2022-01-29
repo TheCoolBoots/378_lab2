@@ -16,10 +16,11 @@ public class ScoreTracker
     {
         this.worldRef = worldRef;
 
-        healthImages = new GreenfootImage[3];
+        healthImages = new GreenfootImage[4];
         healthImages[0] = new GreenfootImage("life0.png");
         healthImages[1] = new GreenfootImage("life1.png");
         healthImages[2] = new GreenfootImage("life2.png");
+        healthImages[3] = new GreenfootImage("life3.png");
         
         playerHealthDisp = new LifeDisplayer(healthImages);
         targetHealthDisp = new LifeDisplayer(healthImages);
@@ -35,7 +36,9 @@ public class ScoreTracker
     public void act(){
         worldRef.showText(String.format("Score = %x", score), 50, 20);
         
+        // System.out.println(targetHealth);
         playerHealthDisp.setValue(playerHealth);
         targetHealthDisp.setValue(targetHealth);
+
     }
 }

@@ -4,13 +4,18 @@ public class Zombie extends Animated
 {
     private static Player playerRef;
     private static Target targetRef;
+    private ScoreTracker scoreTrackerRef;
     
     private final int moveThreshold = 10;
     
-    public Zombie(Player player, Target target){
+    private int framesPerDamage = 60;
+    private int collisionFrameCounter = framesPerDamage-10;
+    
+    public Zombie(Player player, Target target, ScoreTracker scoreTracker){
         super();
         //this.spawnSound = new GreenfootSound("ZombieSpawn.wav");
         //this.deathSound = new GreenfootSound("ZombieDeath.wav");
+        this.scoreTrackerRef = scoreTracker;
         this.rootImgFP = "test";
         this.numFrames = 1;
         this.moveSpeed = 2;
@@ -43,7 +48,7 @@ public class Zombie extends Animated
             yDist = this.getY() - playerRef.getY();
         }
         
-        System.out.println(yDist);
+        // System.out.println(yDist);
         // need to have moveThreshold or else zombie will only move left/right if on exact same y-coord as target
         if(Math.abs(xDist) > Math.abs(yDist) && Math.abs(yDist) > moveThreshold){
             // zombie will be moving up or down
@@ -65,10 +70,41 @@ public class Zombie extends Animated
         }
     }
     
+    private void handleTargetCollision(){
+        if(collisionFrameCounter % framesPerDamage == 0){
+            scoreTrackerRef.targetHealth -= 1;
+            collisionFrameCounter = 1;
+            System.out.println("Damage");
+        }
+        else{
+            collisionFrameCounter += 1;
+        }
+    }
+    
+    private void handlePlayerCollision(){
+         if(collisionFrameCounter % framesPerDamage == 0){
+            scoreTrackerRef.playerHealth -= 1;
+            collisionFrameCounter = 1;
+        }
+        else{
+            collisionFrameCounter += 1;
+        }
+    }
+    
     public void act()
     {
         this.setDirection(this.getTargetDirection());
         //System.out.println("direction = " + String.valueOf(this.getDirection()));
         super.act();
+                
+        if(isTouching(Target.class)){
+            handleTargetCollision();
+        }
+        else if(isTouching(Player.class)){
+            handlePlayerCollision();
+        }
+        else{
+            collisionFrameCounter = framesPerDamage-50;
+        }
     }
 }

@@ -15,11 +15,11 @@ public class MyWorld extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1);
         
-        
+        scoreTracker = new ScoreTracker(this);
         Player player = new Player();
         Target target = new Target();
-        Zombie zombie = new Zombie(player, target);
-        scoreTracker = new ScoreTracker(this);
+        Zombie zombie = new Zombie(player, target, scoreTracker);
+        
         
         
         addObject(player, 0, 0);
