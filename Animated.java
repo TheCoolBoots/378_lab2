@@ -15,10 +15,12 @@ public class Animated extends Actor
     protected GreenfootSound spawnSound;
     protected GreenfootSound deathSound;
     protected String rootImgFP;
-    protected int numFrames;
-    protected int moveSpeed;
+    protected int numFrames = 1;
+    protected int moveSpeed = 1;
+    protected int frameSkip = 0;
     
     private int moveDirection;
+    private int frameSkipCounter = 0;
     private boolean moving = true;
     private int currentFrame = 0;
     private HashMap<String, GreenfootImage> images;
@@ -60,7 +62,10 @@ public class Animated extends Actor
     }
     
     private GreenfootImage getNextAnimationFrame(){
-        currentFrame = (currentFrame + 1)%numFrames;
+        if(frameSkipCounter % frameSkip == 0){
+            currentFrame = (currentFrame + 1)%numFrames;
+            frameSkipCounter = 0;
+        }
         return images.get(String.format("%x%x", moveDirection, currentFrame));
     }
     

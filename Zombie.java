@@ -16,6 +16,7 @@ public class Zombie extends Animated
         this.moveSpeed = 2;
         this.playerRef = player;
         this.targetRef = target;
+        this.frameSkip = 5;
         
         super.loadAllImages();
     }
