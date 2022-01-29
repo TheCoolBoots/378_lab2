@@ -1,30 +1,41 @@
-/**
- * Write a description of class ScoreTracker here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class ScoreTracker  
-{
-    // instance variables - replace the example below with your own
-    private int x;
+import greenfoot.*;
 
-    /**
-     * Constructor for objects of class ScoreTracker
-     */
-    public ScoreTracker()
+public class ScoreTracker 
+{
+    private MyWorld worldRef; 
+    private GreenfootImage[] healthImages;
+    
+    private LifeDisplayer playerHealthDisp;
+    private LifeDisplayer targetHealthDisp;
+    
+    public static int playerHealth = 3;
+    public static int targetHealth = 3;
+    public static int score = 0;
+    
+    public ScoreTracker(MyWorld worldRef)
     {
+        this.worldRef = worldRef;
+
+        healthImages = new GreenfootImage[3];
+        healthImages[0] = new GreenfootImage("life0.png");
+        healthImages[1] = new GreenfootImage("life1.png");
+        healthImages[2] = new GreenfootImage("life2.png");
+        
+        playerHealthDisp = new LifeDisplayer(healthImages);
+        targetHealthDisp = new LifeDisplayer(healthImages);
+        
+        worldRef.addObject(playerHealthDisp, worldRef.getWidth() - 45, 30);
+        worldRef.addObject(targetHealthDisp, worldRef.getWidth() - 45, 60);
+        
+        worldRef.showText("Player HP", worldRef.getWidth() - 130, 30);
+        worldRef.showText("Target HP", worldRef.getWidth() - 130, 60);
+        
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public void act(){
+        worldRef.showText(String.format("Score = %x", score), 50, 20);
+        
+        playerHealthDisp.setValue(playerHealth);
+        targetHealthDisp.setValue(targetHealth);
     }
 }
