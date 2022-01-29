@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=ScoreTracker
-comment1.params=worldRef
-comment1.target=ScoreTracker(MyWorld)
-comment2.params=
-comment2.target=void\ act()
-numComments=3
