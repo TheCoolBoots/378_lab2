@@ -18,6 +18,7 @@ public class Animated extends Actor
     protected int numFrames = 1;
     protected int moveSpeed = 1;
     protected int frameSkip = 0;
+    protected int spriteScale = 1;
     
     private int moveDirection;
     private int frameSkipCounter = 0;
@@ -37,6 +38,7 @@ public class Animated extends Actor
                 String fileName = String.format("%s%o%o.png", rootImgFP, dir, frame);
                 // System.out.println(key + " " + fileName);
                 images.put(key, new GreenfootImage(fileName));
+                images.get(key).scale(spriteScale, spriteScale);
             }
         }
     }
@@ -62,10 +64,16 @@ public class Animated extends Actor
     }
     
     private GreenfootImage getNextAnimationFrame(){
-        if(frameSkipCounter % frameSkip == 0){
-            currentFrame = (currentFrame + 1)%numFrames;
-            frameSkipCounter = 0;
+        if(moving){
+            if(frameSkipCounter % frameSkip == 0){
+                currentFrame = (currentFrame + 1)%numFrames;
+                frameSkipCounter = 1;
+            }
+            else{
+                frameSkipCounter += 1;
+            }
         }
+
         return images.get(String.format("%x%x", moveDirection, currentFrame));
     }
     

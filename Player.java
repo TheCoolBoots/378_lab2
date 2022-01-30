@@ -14,7 +14,7 @@ public class Player extends Character
      */
     public void act()
     {
-         if (Greenfoot.isKeyDown("left")){
+/*         if (Greenfoot.isKeyDown("left")){
             if(getX() >= 5){
             setLocation(getX()-5, getY());
             }
@@ -49,12 +49,13 @@ public class Player extends Character
         if (Greenfoot.isKeyDown("down")){
             if (getY() <= 1195){
             setLocation(getX(), getY()+5);
-            }
+            }  
             Actor b = getOneIntersectingObject(debree.class);
             Actor c = getOneIntersectingObject(house.class);
             if (b != null | c != null){
                 setLocation(getX(), getY() - 5);
             }
         }
+    }*/
     }
 }

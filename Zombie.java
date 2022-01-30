@@ -16,12 +16,13 @@ public class Zombie extends Animated
         //this.spawnSound = new GreenfootSound("ZombieSpawn.wav");
         //this.deathSound = new GreenfootSound("ZombieDeath.wav");
         this.scoreTrackerRef = scoreTracker;
-        this.rootImgFP = "test";
-        this.numFrames = 1;
+        this.rootImgFP = "Zombie";
+        this.numFrames = 2;
         this.moveSpeed = 2;
         this.playerRef = player;
         this.targetRef = target;
-        this.frameSkip = 5;
+        this.frameSkip = 20;
+        this.spriteScale = 40;
         
         super.loadAllImages();
     }
@@ -79,6 +80,7 @@ public class Zombie extends Animated
         else{
             collisionFrameCounter += 1;
         }
+        this.setMoving(false);
     }
     
     private void handlePlayerCollision(){
