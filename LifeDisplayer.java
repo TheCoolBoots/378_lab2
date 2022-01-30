@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class LifeDisplayer extends Actor
 {
+    
     private int value = 3;
     private GreenfootImage[] images;
     private boolean firstTime = true;
