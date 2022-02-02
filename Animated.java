@@ -20,6 +20,7 @@ public class Animated extends Actor
     protected int frameSkip = 0;
     protected int spriteScale = 1;
     
+    
     private int moveDirection;
     private int frameSkipCounter = 0;
     private boolean moving = true;
