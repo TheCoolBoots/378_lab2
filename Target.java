@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Target extends Character
+public class Target extends Animated
 {
     /**
      * Act - do whatever the Target wants to do. This method is called whenever

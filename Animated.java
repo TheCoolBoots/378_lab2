@@ -12,8 +12,7 @@ public class Animated extends Actor
 {
     
     
-    protected GreenfootSound spawnSound;
-    protected GreenfootSound deathSound;
+    protected GreenfootSound[] footstepSounds;
     protected String rootImgFP;
     protected int numFrames = 1;
     protected int moveSpeed = 1;
@@ -25,6 +24,7 @@ public class Animated extends Actor
     private int frameSkipCounter = 0;
     private boolean moving = true;
     private int currentFrame = 0;
+    private int currentFootstepSound = 0;
     private HashMap<String, GreenfootImage> images;
     
     public Animated(){
@@ -64,10 +64,20 @@ public class Animated extends Actor
         }
     }
     
+    private void playWalkSound(){
+        if(currentFootstepSound >= footstepSounds.length){
+            currentFootstepSound = 0;
+        }
+        
+        footstepSounds[currentFootstepSound].play();
+        currentFootstepSound ++;
+    }
+    
     private GreenfootImage getNextAnimationFrame(){
         if(moving){
             if(frameSkipCounter % frameSkip == 0){
                 currentFrame = (currentFrame + 1)%numFrames;
+                playWalkSound();
                 frameSkipCounter = 1;
             }
             else{
