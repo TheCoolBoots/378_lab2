@@ -1,0 +1,31 @@
+Stuff that is not complete:
+	Player Animations
+	Player sound effects
+		walking sound effect
+		shoot sound effect
+		hit sound effect
+	Player voicelines (using the speechbubble class)
+		reaction to dog getting hurt
+		dog barking/encouragement
+	Target hit sound effect
+	Start screen
+	Game over screen
+	Target Animations
+	Map
+		Zombie spawning
+		Obstacles
+		Obstacle/Bullet collisions
+	Background music
+	
+Assignments:
+	Player Animations = Christian
+	start/end screen = Edwin
+	Map = Edwin
+	Target animations = Andrew
+	Target voicelines/sound effects = Andrew
+	Background music = Andrew
+	Player sound effects:
+		asset aquisition = Andrew
+		implementation = Christian
+		
+		
