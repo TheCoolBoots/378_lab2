@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.Random;
 
 public class Zombie extends Animated
 {
@@ -8,23 +9,37 @@ public class Zombie extends Animated
     
     private final int moveThreshold = 10;
     
-    private int framesPerDamage = 60;
+    private int framesPerDamage = 120;
     private int collisionFrameCounter = framesPerDamage-10;
+    
+    private GreenfootSound targetHurtSound;
+    private GreenfootSound neutralSound;
+    private Random rand;
     
     public Zombie(Player player, Target target, ScoreTracker scoreTracker){
         super();
-        //this.spawnSound = new GreenfootSound("ZombieSpawn.wav");
-        //this.deathSound = new GreenfootSound("ZombieDeath.wav");
+        
+        // configure the animated superclass
+        this.footstepSounds = new GreenfootSound[2];
+        this.footstepSounds[0] = new GreenfootSound("leftFootstep.mp3");
+        this.footstepSounds[0].setVolume(30);
+        this.footstepSounds[1] = new GreenfootSound("rightFootstep.mp3");
+        this.footstepSounds[1].setVolume(30);
         this.scoreTrackerRef = scoreTracker;
         this.rootImgFP = "Zombie";
         this.numFrames = 2;
         this.moveSpeed = 2;
         this.playerRef = player;
         this.targetRef = target;
-        this.frameSkip = 20;
+        this.frameSkip = 30;
         this.spriteScale = 40;
         
+        // load the animated superclass images
         super.loadAllImages();
+        
+        targetHurtSound = new GreenfootSound("dogHurt.mp3");
+        neutralSound = new GreenfootSound("zombie.mp3");
+        rand = new Random();
     }
     
     private double getDistToActor(Actor actor){
@@ -73,9 +88,12 @@ public class Zombie extends Animated
     
     private void handleTargetCollision(){
         if(collisionFrameCounter % framesPerDamage == 0){
-            scoreTrackerRef.targetHealth -= 1;
-            collisionFrameCounter = 1;
-            System.out.println("Damage");
+            if(scoreTrackerRef.targetHealth > 0){
+                scoreTrackerRef.targetHealth -= 1;
+                collisionFrameCounter = 1;
+                System.out.println("Damage");
+                targetHurtSound.play();
+            }
         }
         else{
             collisionFrameCounter += 1;
@@ -108,5 +126,9 @@ public class Zombie extends Animated
         else{
             collisionFrameCounter = framesPerDamage-50;
         }
+        
+        if(this.rand.nextInt(200) == 0)
+            neutralSound.play();
+        
     }
 }
