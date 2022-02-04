@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Player extends Character
+public class Player extends Animated
 {
     private float delay = 100;
     
@@ -16,7 +16,7 @@ public class Player extends Character
     public void act()
     {
         // Delay is put in place so players cannot spam bullets
-        if (delay >= 100 && Greenfoot.isKeyDown("space")) {
+        if (delay >= 33 && Greenfoot.isKeyDown("space")) {
             getWorld().addObject(new Bullet(direction), getX(), getY());
             delay = 0;
         }
@@ -28,15 +28,14 @@ public class Player extends Character
         
     private void Movement() {
         if (Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")){
-         if (Greenfoot.isKeyDown("left")){
             if(getX() >= 5){
                 setLocation(getX()-5, getY());
             }
-            Actor b = getOneIntersectingObject(debree.class);
-            Actor c = getOneIntersectingObject(house.class);
-            if (b != null | c != null){
-                setLocation(getX()+5, getY());
-            }
+            // Actor b = getOneIntersectingObject(debree.class);
+            // Actor c = getOneIntersectingObject(house.class);
+            //if (b != null | c != null){
+            //    setLocation(getX()+5, getY());
+            //}
             
             direction = "W";
         }
@@ -44,11 +43,11 @@ public class Player extends Character
             if(getX() <= 1195){
                 setLocation(getX()+5, getY());
             }
-            Actor b = getOneIntersectingObject(debree.class);
-            Actor c = getOneIntersectingObject(house.class);
-            if (b != null | c != null){
-                setLocation(getX()-5, getY());
-            }
+            // Actor b = getOneIntersectingObject(debree.class);
+            // Actor c = getOneIntersectingObject(house.class);
+            //if (b != null | c != null){
+            //    setLocation(getX()-5, getY());
+            //}
             
             direction = "E";
         }
@@ -56,11 +55,11 @@ public class Player extends Character
             if (getY() >= 5){
                 setLocation(getX(), getY()-5);
             }
-            Actor b = getOneIntersectingObject(debree.class);
-            Actor c = getOneIntersectingObject(house.class);
-            if (b != null | c != null){
-                setLocation(getX(), getY() + 5);
-            }
+            // Actor b = getOneIntersectingObject(debree.class);
+            // Actor c = getOneIntersectingObject(house.class);
+            //if (b != null | c != null){
+            //    setLocation(getX(), getY() + 5);
+            //}
             
             direction = "N";
         }
@@ -69,12 +68,11 @@ public class Player extends Character
                 setLocation(getX(), getY()+5);
             }
             setLocation(getX(), getY()+5);
-            }  
-            Actor b = getOneIntersectingObject(debree.class);
-            Actor c = getOneIntersectingObject(house.class);
-            if (b != null | c != null){
-                setLocation(getX(), getY() - 5);
-            }
+            // Actor b = getOneIntersectingObject(debree.class);
+            // Actor c = getOneIntersectingObject(house.class);
+            //if (b != null | c != null){
+            //    setLocation(getX(), getY() - 5);
+            //}
             
             direction = "S";
         }

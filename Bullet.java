@@ -1,5 +1,4 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
 /**
  * Write a description of class Bullet here.
  * 
@@ -9,12 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Bullet extends Player
 {
     private int XMove = 0, YMove = 0;
-    private float speed = 3;
+    private float speed = 15;
     private float lifeTime = 0;
     
     public Bullet(String direction) {
         super();
-        
+        System.out.println(direction);
         if (direction == "N") {
             XMove = 0;
             YMove = -1;
@@ -40,8 +39,11 @@ public class Bullet extends Player
         // We have a set lifetime so bullets do not travel forever
         if (checkBoundaries() || lifeTime >= 100) {
             getWorld().removeObject(this);
+            return;
         }
         lifeTime++;
+        
+        checkCollision();
     }
     
     private Boolean checkBoundaries() {
@@ -53,5 +55,19 @@ public class Bullet extends Player
         }
         
         return false;
+    }
+    
+    private void checkCollision() {
+        Actor Zombie;
+        Zombie = getOneObjectAtOffset(0, 0, Zombie.class);
+        
+        // If we are hitting a zombie, remove it from the world
+        if (Zombie != null) {
+            System.out.println("Here");
+            World detect;
+            detect = getWorld();
+            detect.removeObject(Zombie);
+            detect.removeObject(this);
+        }
     }
 }
