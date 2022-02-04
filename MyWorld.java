@@ -32,7 +32,7 @@ public class MyWorld extends World
         if(Greenfoot.getRandomNumber(100) == 1) {
             int[][] locations = new int[][] { {5, 5}, {1195, 5}, {1195, 895}, {5, 895} };
             int ran = Greenfoot.getRandomNumber(4);
-            addObject(new Zombie(player, target, scoreTracker), locations[ran][0], locations[ran][1]);
+            //addObject(new Zombie(player, target, scoreTracker), locations[ran][0], locations[ran][1]);
         }
     }
     

@@ -76,5 +76,28 @@ public class Player extends Animated
             
             direction = "S";
         }
+        
+        diagonalShots();
+    }
+    
+    // This method will check the bullet directions to make sure that the
+    //  bullets can be shot at diagonal angles
+    private void diagonalShots() {
+        if ((Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) && 
+        (Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w"))) {
+            direction = "NW";
+        }
+        else if ((Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) && 
+        (Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s"))) {
+            direction = "SW";
+        }
+        else if ((Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) && 
+        (Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w"))) {
+            direction = "NE";
+        }
+        else if ((Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) && 
+        (Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s"))) {
+            direction = "SE";
+        }
     }
 }

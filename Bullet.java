@@ -13,6 +13,7 @@ public class Bullet extends Player
     
     public Bullet(String direction) {
         super();
+        
         System.out.println(direction);
         if (direction == "N") {
             XMove = 0;
@@ -29,6 +30,22 @@ public class Bullet extends Player
         else if (direction == "E") {
             XMove = 1;
             YMove = 0;
+        }
+        else if (direction == "NW") {
+            XMove = -1;
+            YMove = -1;
+        }
+        else if (direction == "SW") {
+            XMove = -1;
+            YMove = 1;
+        }
+        else if (direction == "NE") {
+            XMove = 1;
+            YMove = -1;
+        }
+        else if (direction == "SE") {
+            XMove = 1;
+            YMove = 1;
         }
     }
     
@@ -63,7 +80,6 @@ public class Bullet extends Player
         
         // If we are hitting a zombie, remove it from the world
         if (Zombie != null) {
-            System.out.println("Here");
             World detect;
             detect = getWorld();
             detect.removeObject(Zombie);
