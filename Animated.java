@@ -18,7 +18,7 @@ public class Animated extends Actor
     protected int moveSpeed = 1;
     protected int frameSkip = 0;
     protected int spriteScale = 1;
-    
+    protected int numDirections = 1;
     
     private int moveDirection;
     private int frameSkipCounter = 0;
@@ -34,7 +34,7 @@ public class Animated extends Actor
     
     protected void loadAllImages(){
         for(int frame = 0; frame<numFrames; frame++){
-            for(int dir = 0; dir<4; dir++){
+            for(int dir = 0; dir<numDirections; dir++){
                 String key = String.format("%x%x", dir, frame);
                 String fileName = String.format("%s%o%o.png", rootImgFP, dir, frame);
                 // System.out.println(key + " " + fileName);
@@ -108,7 +108,8 @@ public class Animated extends Actor
     
     public void act()
     {
-        move();
+        if (this instanceof Zombie)
+            move();
         setImage(getNextAnimationFrame());     
         //System.out.println("Super moving");
     }

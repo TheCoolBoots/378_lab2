@@ -28,6 +28,7 @@ public class Zombie extends Animated
         this.scoreTrackerRef = scoreTracker;
         this.rootImgFP = "Zombie";
         this.numFrames = 2;
+        this.numDirections = 4;
         this.moveSpeed = 2;
         this.playerRef = player;
         this.targetRef = target;

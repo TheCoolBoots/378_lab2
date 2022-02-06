@@ -14,7 +14,6 @@ public class Bullet extends Player
     public Bullet(String direction) {
         super();
         
-        System.out.println(direction);
         if (direction == "N") {
             XMove = 0;
             YMove = -1;
