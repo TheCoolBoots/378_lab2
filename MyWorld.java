@@ -8,16 +8,22 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MyWorld extends World
 {
-
+    private Player player;
+    private Target target;
+    private GreenfootSound backgroundMusic;
+    
     ScoreTracker scoreTracker;
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 900, 1); 
         scoreTracker = new ScoreTracker(this);
-
-        Player player = new Player();
-        Target target = new Target();
+        backgroundMusic = new GreenfootSound("BackgroundMusic.mp3");
+        backgroundMusic.setVolume(20);
+        backgroundMusic.playLoop();
+        
+        player = new Player();
+        target = new Target();
         Zombie zombie = new Zombie(player, target, scoreTracker);
 
         addObject(player, 1000, 100);
@@ -29,11 +35,11 @@ public class MyWorld extends World
     public void act(){
         scoreTracker.act();
 
-        if(Greenfoot.getRandomNumber(100) == 1) {
+        /*if(Greenfoot.getRandomNumber(100) == 1) {
             int[][] locations = new int[][] { {5, 5}, {1195, 5}, {1195, 895}, {5, 895} };
             int ran = Greenfoot.getRandomNumber(4);
-            //addObject(new Zombie(player, target, scoreTracker), locations[ran][0], locations[ran][1]);
-        }
+            addObject(new Zombie(player, target, scoreTracker), locations[ran][0], locations[ran][1]);
+        }*/
     }
     
     /**
@@ -42,5 +48,6 @@ public class MyWorld extends World
      */
     private void prepare()
     {
+
     }
 }

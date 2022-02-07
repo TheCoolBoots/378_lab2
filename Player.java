@@ -18,13 +18,13 @@ public class Player extends Animated
         
         this.footstepSounds = new GreenfootSound[2];
         this.footstepSounds[0] = new GreenfootSound("leftFootstep.mp3");
-        this.footstepSounds[0].setVolume(30);
+        this.footstepSounds[0].setVolume(0);
         this.footstepSounds[1] = new GreenfootSound("rightFootstep.mp3");
-        this.footstepSounds[1].setVolume(30);
+        this.footstepSounds[1].setVolume(0);
         this.rootImgFP = "Walk";
         this.numFrames = 4;
         this.numDirections = 2;
-        this.frameSkip = 30;
+        this.frameSkip = 15;
         this.spriteScale = 50;
         
         super.loadAllImages();
