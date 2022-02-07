@@ -5,7 +5,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Bullet extends Player
+public class Bullet extends Actor
 {
     private GreenfootSound zombieDeathSound;
     private GreenfootSound shootSound;
@@ -15,7 +15,7 @@ public class Bullet extends Player
     private float lifeTime = 0;
     
     public Bullet(String direction) {
-        super();
+        // super();
         
         zombieDeathSound = new GreenfootSound("ZombieDeath.mp3");
         zombieDeathSound.setVolume(30);

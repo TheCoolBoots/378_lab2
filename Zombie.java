@@ -9,11 +9,13 @@ public class Zombie extends Animated
     
     private final int moveThreshold = 10;
     
-    private int framesPerDamage = 120;
-    private int collisionFrameCounter = framesPerDamage-10;
+    private int framesPerDamageTarget = 120;
+    private int framesPerDamagePlayer = 60;
+    private int collisionFrameCounter = 0;
     
     private GreenfootSound targetHurtSound;
     private GreenfootSound neutralSound;
+    private GreenfootSound playerHurtSound;
     private Random rand;
     
     public Zombie(Player player, Target target, ScoreTracker scoreTracker){
@@ -25,6 +27,8 @@ public class Zombie extends Animated
         this.footstepSounds[0].setVolume(50);
         this.footstepSounds[1] = new GreenfootSound("rightFootstep.mp3");
         this.footstepSounds[1].setVolume(50);
+        this.playerHurtSound = new GreenfootSound("playerHurt.mp3");
+        this.playerHurtSound.setVolume(60);
         this.scoreTrackerRef = scoreTracker;
         this.rootImgFP = "Zombie";
         this.numFrames = 2;
@@ -67,7 +71,7 @@ public class Zombie extends Animated
         
         // System.out.println(yDist);
         // need to have moveThreshold or else zombie will only move left/right if on exact same y-coord as target
-        if(Math.abs(xDist) > Math.abs(yDist) && Math.abs(yDist) > moveThreshold){
+        if(Math.abs(xDist) < moveThreshold || Math.abs(xDist) > Math.abs(yDist) && Math.abs(yDist) > moveThreshold){
             // zombie will be moving up or down
             if(yDist > 0){
                 return 0;
@@ -88,11 +92,11 @@ public class Zombie extends Animated
     }
     
     private void handleTargetCollision(){
-        if(collisionFrameCounter % framesPerDamage == 0){
+        if(collisionFrameCounter % framesPerDamageTarget == 0){
             if(scoreTrackerRef.targetHealth > 0){
                 scoreTrackerRef.targetHealth -= 1;
                 collisionFrameCounter = 1;
-                System.out.println("Damage");
+                System.out.println("Target Damage");
                 targetHurtSound.play();
             }
         }
@@ -103,13 +107,17 @@ public class Zombie extends Animated
     }
     
     private void handlePlayerCollision(){
-         if(collisionFrameCounter % framesPerDamage == 0){
-            scoreTrackerRef.playerHealth -= 1;
-            collisionFrameCounter = 1;
+         if(collisionFrameCounter % framesPerDamagePlayer == 0){
+            if(scoreTrackerRef.playerHealth > 0){
+                scoreTrackerRef.playerHealth -= 1;
+                collisionFrameCounter = 1; 
+                playerHurtSound.play();
+            }
         }
         else{
             collisionFrameCounter += 1;
         }
+        this.setMoving(false);
     }
     
     public void act()
@@ -125,7 +133,8 @@ public class Zombie extends Animated
             handlePlayerCollision();
         }
         else{
-            collisionFrameCounter = framesPerDamage-50;
+            collisionFrameCounter = 0;
+            this.setMoving(true);
         }
         
         if(this.rand.nextInt(200) == 0)
