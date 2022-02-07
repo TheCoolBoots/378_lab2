@@ -14,6 +14,10 @@ public class ScoreTracker
     
     public ScoreTracker(MyWorld worldRef)
     {
+        playerHealth = 3;
+        targetHealth = 3;
+        score = 0;
+        
         this.worldRef = worldRef;
 
         healthImages = new GreenfootImage[4];

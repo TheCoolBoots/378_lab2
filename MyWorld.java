@@ -18,6 +18,7 @@ public class MyWorld extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 900, 1); 
         scoreTracker = new ScoreTracker(this);
+
         backgroundMusic = new GreenfootSound("BackgroundMusic.mp3");
         backgroundMusic.setVolume(20);
         backgroundMusic.playLoop();
