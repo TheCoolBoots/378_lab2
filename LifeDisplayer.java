@@ -25,7 +25,7 @@ public class LifeDisplayer extends Actor
         if(value < 1){
             if(firstTime){
                 firstTime = false;
-                System.out.println("GAME OVER");
+                //System.out.println("GAME OVER");
                 setImage(images[0]);
             }
         } 

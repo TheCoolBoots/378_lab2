@@ -96,8 +96,21 @@ public class Zombie extends Animated
             if(scoreTrackerRef.targetHealth > 0){
                 scoreTrackerRef.targetHealth -= 1;
                 collisionFrameCounter = 1;
-                System.out.println("Target Damage");
+                //System.out.println("Target Damage");
                 targetHurtSound.play();
+                
+                if(scoreTrackerRef.targetHealth == 2){
+                    SpeechBubble b = new SpeechBubble("Reaction2Bubble.png", 300, playerRef, 1.0f, 100, -100);
+                    getWorld().addObject(b, 0, 0);
+                }
+                else if(scoreTrackerRef.targetHealth == 1){
+                    SpeechBubble b = new SpeechBubble("Reaction1Bubble.png", 300, playerRef, 1.0f, 100, -100);
+                    getWorld().addObject(b, 0, 0);
+                }
+                else if(scoreTrackerRef.targetHealth == 0){
+                    SpeechBubble b = new SpeechBubble("Reaction3Bubble.png", 300, playerRef, 1.0f, 100, -100);
+                    getWorld().addObject(b, 0, 0);
+                }
             }
         }
         else{
