@@ -4,19 +4,6 @@ dependency1.from=startScreen
 dependency1.to=MyWorld
 dependency1.type=UsesDependency
 dependency10.from=Zombie
-<<<<<<< HEAD
-dependency10.to=Target
-dependency10.type=UsesDependency
-dependency11.from=Zombie
-dependency11.to=ScoreTracker
-dependency11.type=UsesDependency
-dependency12.from=ScoreTracker
-dependency12.to=MyWorld
-dependency12.type=UsesDependency
-dependency13.from=ScoreTracker
-dependency13.to=LifeDisplayer
-dependency13.type=UsesDependency
-=======
 dependency10.to=Player
 dependency10.type=UsesDependency
 dependency11.from=Zombie
@@ -31,7 +18,6 @@ dependency13.type=UsesDependency
 dependency14.from=ScoreTracker
 dependency14.to=LifeDisplayer
 dependency14.type=UsesDependency
->>>>>>> 7590e0680f3e72f7d56771c69c9fed121f08c310
 dependency2.from=endScreen
 dependency2.to=endLetters
 dependency2.type=UsesDependency
@@ -53,18 +39,6 @@ dependency7.type=UsesDependency
 dependency8.from=Player
 dependency8.to=Bullet
 dependency8.type=UsesDependency
-<<<<<<< HEAD
-dependency9.from=Zombie
-dependency9.to=Player
-dependency9.type=UsesDependency
-editor.fx.0.height=758
-editor.fx.0.width=822
-editor.fx.0.x=-1094
-editor.fx.0.y=-192
-height=27
-package.numDependencies=13
-package.numTargets=15
-=======
 dependency9.from=Bullet
 dependency9.to=ScoreTracker
 dependency9.type=UsesDependency
@@ -75,7 +49,6 @@ editor.fx.0.y=0
 height=1447
 package.numDependencies=14
 package.numTargets=14
->>>>>>> 7590e0680f3e72f7d56771c69c9fed121f08c310
 project.charset=UTF-8
 publish.hasSource=false
 publish.locked=true
@@ -189,11 +162,7 @@ target9.width=120
 target9.x=0
 target9.y=0
 version=3.0.0
-<<<<<<< HEAD
-width=159
-=======
 width=1294
->>>>>>> 7590e0680f3e72f7d56771c69c9fed121f08c310
 world.lastInstantiated=MyWorld
 xPosition=0
 yPosition=0
