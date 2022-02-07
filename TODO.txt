@@ -19,7 +19,7 @@ Stuff that is not complete:
 Assignments:
 	start/end screen = Edwin
 	Map = Edwin
-	Target animations = Andrew
+	Target animations = Christian
 	Target voicelines/sound effects = Andrew
 	Background music = Andrew
 	Player sound effects:

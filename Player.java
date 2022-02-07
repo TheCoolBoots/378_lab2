@@ -95,7 +95,6 @@ public class Player extends Animated
             if (getY() <= 1195){
                 setLocation(getX(), getY()+5);
             }
-            setLocation(getX(), getY()+5);
             // Actor b = getOneIntersectingObject(debree.class);
             // Actor c = getOneIntersectingObject(house.class);
             //if (b != null | c != null){
