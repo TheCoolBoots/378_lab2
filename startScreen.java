@@ -18,16 +18,18 @@ public class startScreen extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 900, 1); 
         //prepare();
+        prepare();
     }
+
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
      */
-    /*private void prepare()
+    private void prepare()
     {
-        titleletters titleletters = new titleletters();
-        addObject(titleletters,612,436);
-    }*/
+        startletters startletters = new startletters();
+        addObject(startletters,617,385);
+    }
     
     public void act(){
         if(Greenfoot.isKeyDown("enter")){
