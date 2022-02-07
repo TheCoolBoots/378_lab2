@@ -1,5 +1,4 @@
 Stuff that is not complete:
-	Player Animations
 	Player sound effects
 		walking sound effect
 		shoot sound effect
@@ -18,14 +17,17 @@ Stuff that is not complete:
 	Background music
 	
 Assignments:
-	Player Animations = Christian
 	start/end screen = Edwin
 	Map = Edwin
-	Target animations = Andrew
+	Target animations = Christian
 	Target voicelines/sound effects = Andrew
 	Background music = Andrew
 	Player sound effects:
 		asset aquisition = Andrew
 		implementation = Christian
+	Player shoot sprite - Christian
 		
 		
+Finished:
+	Player Walk Animations - Christian
+	Player Idle Animations - Christian
