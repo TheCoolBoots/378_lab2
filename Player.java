@@ -18,12 +18,12 @@ public class Player extends Animated
         
         this.footstepSounds = new GreenfootSound[2];
         this.footstepSounds[0] = new GreenfootSound("leftFootstep.mp3");
-        this.footstepSounds[0].setVolume(30);
+        this.footstepSounds[0].setVolume(0);
         this.footstepSounds[1] = new GreenfootSound("rightFootstep.mp3");
-        this.footstepSounds[1].setVolume(30);
+        this.footstepSounds[1].setVolume(0);
         this.rootImgFP = "Walk";
         this.numFrames = 4;
-        this.numDirections = 2;
+        this.numDirections = 4;
         this.frameSkip = 30;
         this.spriteScale = 50;
         
@@ -47,6 +47,8 @@ public class Player extends Animated
         }
         
     private void Movement() {
+        boolean moving = false;
+        
         if (Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")){
             if(getX() >= 5){
                 setLocation(getX()-5, getY());
@@ -59,6 +61,7 @@ public class Player extends Animated
             
             direction = "W";
             this.setDirection(1);
+            moving =true;
         }
         if (Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")){
             if(getX() <= 1195){
@@ -72,6 +75,7 @@ public class Player extends Animated
             
             direction = "E";
             this.setDirection(0);
+            moving =true;
         }
         if (Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w")){
             if (getY() >= 5){
@@ -83,7 +87,9 @@ public class Player extends Animated
             //    setLocation(getX(), getY() + 5);
             //}
             
+            idleToWalk();
             direction = "N";
+            moving =true;
         }
         if (Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s")){
             if (getY() <= 1195){
@@ -96,8 +102,12 @@ public class Player extends Animated
             //    setLocation(getX(), getY() - 5);
             //}
             
+            idleToWalk();
             direction = "S";
+            moving =true;
         }
+        
+        standingStillCheck(moving);
         
         diagonalShots();
     }
@@ -121,5 +131,25 @@ public class Player extends Animated
         (Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s"))) {
             direction = "E";
         }
+    }
+    
+    private void standingStillCheck(boolean moving) {
+        int currentDirection = this.getDirection();
+        
+        // If we're not moving, switch from walking to idle animation
+        // 2 - Idle right 3 - Idle left
+        if (!moving) {
+            if (currentDirection == 0) {
+                this.setDirection(2);
+            }
+            else if (currentDirection == 1) {
+                this.setDirection(3);
+            }
+        }
+    }
+    
+    private void idleToWalk() {
+        if (this.getDirection() == 2) this.setDirection(0);
+        else if (this.getDirection() == 3) this.setDirection(1);
     }
 }

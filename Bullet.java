@@ -7,12 +7,22 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Bullet extends Player
 {
+    private GreenfootSound zombieDeathSound;
+    private GreenfootSound shootSound;
+    
     private int XMove = 0, YMove = 0;
     private float speed = 15;
     private float lifeTime = 0;
     
     public Bullet(String direction) {
         super();
+        
+        zombieDeathSound = new GreenfootSound("ZombieDeath.mp3");
+        zombieDeathSound.setVolume(30);
+        shootSound = new GreenfootSound("TechySheriff2.mp3");
+        shootSound.setVolume(40);
+        
+        shootSound.play();
         
         if (direction == "N") {
             XMove = 0;
@@ -80,9 +90,12 @@ public class Bullet extends Player
         // If we are hitting a zombie, remove it from the world
         if (Zombie != null) {
             World detect;
+            ScoreTracker.score += 1;
             detect = getWorld();
+            zombieDeathSound.play();
             detect.removeObject(Zombie);
             detect.removeObject(this);
+            
         }
     }
 }

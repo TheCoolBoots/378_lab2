@@ -22,9 +22,9 @@ public class Zombie extends Animated
         // configure the animated superclass
         this.footstepSounds = new GreenfootSound[2];
         this.footstepSounds[0] = new GreenfootSound("leftFootstep.mp3");
-        this.footstepSounds[0].setVolume(30);
+        this.footstepSounds[0].setVolume(50);
         this.footstepSounds[1] = new GreenfootSound("rightFootstep.mp3");
-        this.footstepSounds[1].setVolume(30);
+        this.footstepSounds[1].setVolume(50);
         this.scoreTrackerRef = scoreTracker;
         this.rootImgFP = "Zombie";
         this.numFrames = 2;
