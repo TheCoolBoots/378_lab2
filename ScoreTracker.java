@@ -36,6 +36,10 @@ public class ScoreTracker
         worldRef.showText("Target HP", worldRef.getWidth() - 130, 60);
         
     }
+    
+    public static int getScore(){
+        return score;
+    }
 
     public void act(){
         worldRef.showText(String.format("Score = %x", score), 50, 20);

@@ -19,14 +19,25 @@ public class endScreen extends World
         super(1200, 900, 1); 
         prepare();
     }
+    
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
      */
+
     private void prepare()
     {
         endLetters endLetters = new endLetters();
         addObject(endLetters,617,385);
+        endLetters.setLocation(619,450);
+        label label = new label();
+        addObject(label,724,373);
+    }
+    
+    public void act(){
+        if(Greenfoot.isKeyDown("r")){
+            Greenfoot.setWorld(new MyWorld());
+        }
     }
 }
 
