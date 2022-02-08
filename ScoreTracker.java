@@ -38,7 +38,7 @@ public class ScoreTracker
     }
 
     public void act(){
-        worldRef.showText(String.format("Score = %x", score), 50, 20);
+        worldRef.showText(String.format("Score = %d", score), 50, 20);
         
         // System.out.println(targetHealth);
         playerHealthDisp.setValue(playerHealth);
