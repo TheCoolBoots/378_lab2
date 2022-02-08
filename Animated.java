@@ -77,7 +77,7 @@ public class Animated extends Actor
         if(moving){
             if(frameSkipCounter % frameSkip == 0){
                 currentFrame = (currentFrame + 1)%numFrames;
-                playWalkSound();
+                if (this instanceof Zombie || this instanceof Player) playWalkSound();
                 frameSkipCounter = 1;
             }
             else{

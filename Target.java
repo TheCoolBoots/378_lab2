@@ -8,12 +8,25 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Target extends Animated
 {
-    /**
-     * Act - do whatever the Target wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    
+    public Target() {
+        super();
+        
+        this.rootImgFP = "Dog";
+        this.numFrames = 2;
+        this.numDirections = 2;
+        this.frameSkip = 30;
+        this.spriteScale = 50;
+
+        // Idle - 0 Hurt - 1
+        super.loadAllImages();
+    }
+    
     public void act()
     {
-        // Add your action code here.
+        super.act();
+        
+        if (isTouching(Zombie.class)) this.setDirection(1);
+        else this.setDirection(0);
     }
 }
