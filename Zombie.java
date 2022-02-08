@@ -10,7 +10,7 @@ public class Zombie extends Animated
     private final int moveThreshold = 10;
     
     private int framesPerDamageTarget = 120;
-    private int framesPerDamagePlayer = 60;
+    private int framesPerDamagePlayer = 90;
     private int collisionFrameCounter = 0;
     
     private GreenfootSound targetHurtSound;
@@ -110,7 +110,6 @@ public class Zombie extends Animated
                 else if(scoreTrackerRef.targetHealth == 0){
                     SpeechBubble b = new SpeechBubble("Reaction3Bubble.png", 300, playerRef, 1.0f, 100, -100);
                     getWorld().addObject(b, 0, 0);
-                    Greenfoot.setWorld(new endScreen());
                 }
             }
         }
@@ -126,9 +125,6 @@ public class Zombie extends Animated
                 scoreTrackerRef.playerHealth -= 1;
                 collisionFrameCounter = 1; 
                 playerHurtSound.play();
-                if (scoreTrackerRef.playerHealth == 0){
-                    Greenfoot.setWorld(new endScreen());
-                }
             }
         }
         else{

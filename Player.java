@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Animated
 {
-    private float delay = 100;
+    private float delay = 50;
     
     // Direction is set when the player moves and indicates which way is forward. Used to control which direction the bullets shoot
     private String direction = "N";
@@ -36,7 +36,7 @@ public class Player extends Animated
         super.act(); 
         
         // Delay is put in place so players cannot spam bullets
-        if (delay >= 33 && Greenfoot.isKeyDown("space")) {
+        if (delay >= 15 && Greenfoot.isKeyDown("space")) {
             getWorld().addObject(new Bullet(direction), getX(), getY());
             delay = 0;
         }

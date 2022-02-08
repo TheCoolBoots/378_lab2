@@ -13,7 +13,7 @@ public class MyWorld extends World
     public Target target;
     private GreenfootSound backgroundMusic;
     
-    private float spawnChance = .01f;
+    private float spawnChance = .02f;
     
     private Random rand = new Random();
     
@@ -26,11 +26,11 @@ public class MyWorld extends World
 
         backgroundMusic = new GreenfootSound("BackgroundMusic.mp3");
         backgroundMusic.setVolume(20);
-        //backgroundMusic.playLoop();
+        backgroundMusic.playLoop();
         
         player = new Player();
         target = new Target();
-        addObject(player, getWidth()/2, getHeight()/2);
+        addObject(player, getWidth()/2 + 100, getHeight()/2 + 200);
         addObject(target, getWidth()/2, getHeight()/2);
         
         //Zombie zombie = new Zombie(player, target, scoreTracker);
@@ -42,6 +42,8 @@ public class MyWorld extends World
         addObject(dogBark, 0, 0);
     }
 
+    
+    private int lastScore = 0;
     public void act(){
         scoreTracker.act();
 
@@ -66,8 +68,23 @@ public class MyWorld extends World
             }
         }
         
-        if(scoreTracker.score + 1 % 10 == 0)
-            spawnChance += .01f;
+        if(lastScore < scoreTracker.score && (scoreTracker.score) % 10 == 0){
+            spawnChance += .005f;
+            // System.out.println(spawnChance);
+        }
+        lastScore = scoreTracker.score;
+        
+        if(scoreTracker.playerHealth <= 0)
+        {
+            backgroundMusic.stop();
+            Greenfoot.setWorld(new endScreen());
+        }   
+        else if(scoreTracker.targetHealth <= 0)
+        {
+            backgroundMusic.stop();
+            Greenfoot.setWorld(new endScreen());
+        }
+            
     }
     
 }
