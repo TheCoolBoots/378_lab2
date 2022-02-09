@@ -13,6 +13,9 @@ public class Player extends Animated
     // Direction is set when the player moves and indicates which way is forward. Used to control which direction the bullets shoot
     private String direction = "N";
     
+    public boolean tripleShot = false;
+    private String[] bulletDirections = {"N", "NW", "W", "SW", "S", "SE", "E", "NE"};
+    
     public Player() {
         super();
         
@@ -37,7 +40,18 @@ public class Player extends Animated
         
         // Delay is put in place so players cannot spam bullets
         if (delay >= 15 && Greenfoot.isKeyDown("space")) {
-            getWorld().addObject(new Bullet(direction), getX(), getY());
+            // Get the number of bullets, get all the proper directions,
+            //  shoot all bullets in said directions
+            int numBullets = 1;
+            if (tripleShot) {
+                numBullets = 3;
+            }
+            
+            String[] directions = new String[numBullets];
+            directions = getTripleShotDirections();
+            for (int i = 0; i < directions.length; i++) {
+                getWorld().addObject(new Bullet(directions[i]), getX(), getY());
+            }
             delay = 0;
         }
         
@@ -150,5 +164,28 @@ public class Player extends Animated
     private void idleToWalk() {
         if (this.getDirection() == 2) this.setDirection(0);
         else if (this.getDirection() == 3) this.setDirection(1);
+    }
+    
+    // Get the current direction and assign the directions to the sides of it
+    private String[] getTripleShotDirections() {
+        int index = 0;
+        String[] directions = new String[3];
+        directions[0] = direction;
+        
+        
+        for (int i = 0; i < bulletDirections.length; i++) {
+            if (bulletDirections[i] == direction) {
+                index = i;
+                break;
+            }
+        }
+        
+        int upperIndex = (index + 1) % bulletDirections.length;
+        int lowerIndex = index - 1;
+        if (lowerIndex < 0) lowerIndex = bulletDirections.length - 1;
+        directions[1] = bulletDirections[lowerIndex];
+        directions[2] = bulletDirections[upperIndex];
+        
+        return directions;
     }
 }
