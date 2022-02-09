@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Animated
 {
     private float delay = 50;
-    
+    public boolean invincible = false;
     // Direction is set when the player moves and indicates which way is forward. Used to control which direction the bullets shoot
     private String direction = "N";
     

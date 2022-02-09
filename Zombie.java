@@ -93,7 +93,7 @@ public class Zombie extends Animated
     
     private void handleTargetCollision(){
         if(collisionFrameCounter % framesPerDamageTarget == 0){
-            if(scoreTrackerRef.targetHealth > 0){
+            if(scoreTrackerRef.targetHealth > 0 && !targetRef.invincible){
                 scoreTrackerRef.targetHealth -= 1;
                 collisionFrameCounter = 1;
                 //System.out.println("Target Damage");
@@ -121,7 +121,7 @@ public class Zombie extends Animated
     
     private void handlePlayerCollision(){
          if(collisionFrameCounter % framesPerDamagePlayer == 0){
-            if(scoreTrackerRef.playerHealth > 0){
+            if(scoreTrackerRef.playerHealth > 0 && !playerRef.invincible){
                 scoreTrackerRef.playerHealth -= 1;
                 collisionFrameCounter = 1; 
                 playerHurtSound.play();

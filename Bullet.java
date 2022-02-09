@@ -93,9 +93,27 @@ public class Bullet extends Actor
             ScoreTracker.score += 1;
             detect = getWorld();
             zombieDeathSound.play();
+            
             detect.removeObject(Zombie);
             detect.removeObject(this);
             
+        }
+    }
+    
+    private void spawnPowerup(World world){
+        if(Greenfoot.getRandomNumber(10) == 0){
+            switch(Greenfoot.getRandomNumber(3)){
+                case 0:
+                    // spawn invincibility powerup
+                    break;
+                case 1:
+                    // spawn health recovery / health 
+                    break;
+                case 2:
+                    // spawn 
+                    break;
+            }
+
         }
     }
 }
