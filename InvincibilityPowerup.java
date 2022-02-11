@@ -3,14 +3,18 @@ import java.util.List;
 
 public class InvincibilityPowerup extends Actor
 {
-    private int durationFrames = 5000;
-    private int despawnFrames = 4000;
+    private int durationFrames = 500;
     
     private boolean active = false;
+    private static GreenfootImage powerupImg = null;
     
     public InvincibilityPowerup()
     {
-        
+         if(powerupImg == null){
+            powerupImg = new GreenfootImage("forcefield.png");
+            powerupImg.scale(40, 20);
+        }
+        setImage(powerupImg);
     }
 
     public void act(){
@@ -25,25 +29,22 @@ public class InvincibilityPowerup extends Actor
         }
         else{
             if(isTouching(Player.class)){
-                active = true;
-                Animated.invincible = true;
-                // create SpeechBubble class with transparent shield over player and target
-                SpeechBubble playerShield = new SpeechBubble("invincibility.png", durationFrames, getOneIntersectingObject(Player.class), 1.0f, 0, 0);
-                List<Target> targetRef = getObjectsInRange(800, Target.class);
-                SpeechBubble dogShield = new SpeechBubble("invincibility.png", durationFrames, targetRef.get(0), 1.0f, 0, 0);  // hard coded for the moment
-                    // need to pass in reference to target somehow
-            }
-            else if (despawnFrames <= 0){
-                getWorld().removeObject(this);
-            }
-            else{
-                despawnFrames -= 1;
+                handlePlayerCollision();
             }
         }
 
     }
     
     public void handlePlayerCollision(){
-        
+        active = true;
+        Animated.invincible = true;
+        // create SpeechBubble class with transparent shield over player and target
+        SpeechBubble playerShield = new SpeechBubble("invince.png", durationFrames, getOneIntersectingObject(Player.class), .2f, 0, 0);
+        getWorld().addObject(playerShield, 0, 0);
+        List<Target> targetRef = getObjectsInRange(800, Target.class);
+        SpeechBubble dogShield = new SpeechBubble("invince.png", durationFrames, targetRef.get(0), .18f, 0, 0);  // hard coded for the moment
+        getWorld().addObject(dogShield, 0, 0);
+        // need to pass in reference to target somehow
+        setImage("alpha.png");
     }
 }

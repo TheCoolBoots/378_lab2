@@ -3,23 +3,25 @@ import java.util.List;
 
 public class HealthPowerup extends Actor
 {
-    private int despawnFrames = 5000;
-        
-    public void act(){
-        if(despawnFrames <= 0){
-            getWorld().removeObject(this);
+    private static GreenfootImage healthImage = null;
+    
+    public HealthPowerup(){
+        if(healthImage == null){
+            healthImage = new GreenfootImage("life1.png");
+            healthImage.scale(30, 30);
         }
-        else if(isTouching(Player.class)){
+        setImage(healthImage);
+    }
+    
+    public void act(){
+        if(isTouching(Player.class)){
             handlePlayerCollision();
         }
-        else{
-            despawnFrames -= 1;
-        }
-
     }
     
     public void handlePlayerCollision(){
         ScoreTracker.playerHealth = 3;
         ScoreTracker.targetHealth = 3;
+        getWorld().removeObject(this);
     }
 }

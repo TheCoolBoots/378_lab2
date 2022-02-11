@@ -1,4 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.Random;
+
 /**
  * Write a description of class Bullet here.
  * 
@@ -14,8 +16,14 @@ public class Bullet extends Actor
     private float speed = 15;
     private float lifeTime = 0;
     
+    private static Random rand = null;
+    
     public Bullet(String direction) {
         // super();
+        
+        if(rand == null){
+            rand = new Random();
+        }
         
         zombieDeathSound = new GreenfootSound("ZombieDeath.mp3");
         zombieDeathSound.setVolume(30);
@@ -94,23 +102,27 @@ public class Bullet extends Actor
             detect = getWorld();
             zombieDeathSound.play();
             
+            spawnPowerup();
+            
             detect.removeObject(Zombie);
             detect.removeObject(this);
             
         }
     }
     
-    private void spawnPowerup(World world){
-        if(Greenfoot.getRandomNumber(10) == 0){
-            switch(Greenfoot.getRandomNumber(3)){
+    private void spawnPowerup(){
+        if(rand.nextDouble() < .15){
+            switch(rand.nextInt(3)){
                 case 0:
-                    // spawn invincibility powerup
+                    getWorld().addObject(new HealthPowerup(), getX(), getY());
                     break;
                 case 1:
-                    // spawn health recovery / health 
+                    System.out.println(Player.gunLevel);
+                    if(Player.gunLevel < 3)
+                        getWorld().addObject(new UpgradePowerup(), getX(), getY());
                     break;
                 case 2:
-                    // spawn 
+                    getWorld().addObject(new InvincibilityPowerup(), getX(), getY());
                     break;
             }
 

@@ -8,12 +8,24 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class UpgradePowerup extends Actor
 {
-    /**
-     * Act - do whatever the UpgradePowerup wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    private static GreenfootImage upgradeImage = null;
+    
+    public UpgradePowerup(){
+        if(upgradeImage == null){
+            upgradeImage = new GreenfootImage("gunupgrade.png");
+            upgradeImage.scale(30, 30);
+        }
+        setImage(upgradeImage);
+    }
     public void act()
     {
-        // Add your action code here.
+        if(isTouching(Player.class)){
+            handlePlayerCollision();
+        }
+    }
+    
+    private void handlePlayerCollision(){
+        Player.gunLevel += 1;
+        getWorld().removeObject(this);
     }
 }

@@ -13,7 +13,7 @@ public class MyWorld extends World
     public Target target;
     private GreenfootSound backgroundMusic;
     
-    private float spawnChance = .02f;
+    private float spawnChance = .01f;
     
     private Random rand = new Random();
     
@@ -25,7 +25,7 @@ public class MyWorld extends World
         scoreTracker = new ScoreTracker(this);
 
         backgroundMusic = new GreenfootSound("BackgroundMusic.mp3");
-        backgroundMusic.setVolume(20);
+        backgroundMusic.setVolume(40);
         backgroundMusic.playLoop();
         
         player = new Player();
@@ -35,6 +35,15 @@ public class MyWorld extends World
         
         //Zombie zombie = new Zombie(player, target, scoreTracker);
         //addObject(zombie, 500, 300);
+    
+        
+        /*InvincibilityPowerup invincible = new InvincibilityPowerup();
+        UpgradePowerup upgrade = new UpgradePowerup();
+        HealthPowerup heal = new HealthPowerup();
+        
+        addObject(invincible, 50, 50);
+        addObject(upgrade, 100, 50);
+        addObject(heal, 150, 50);*/
         
         SpeechBubble introBubble = new SpeechBubble("StartBubble.png", 400, player, 1.0f, 100, -100);
         addObject(introBubble, 0, 0);
@@ -84,7 +93,7 @@ public class MyWorld extends World
             backgroundMusic.stop();
             Greenfoot.setWorld(new endScreen());
         }
-            
+        
     }
     
 }

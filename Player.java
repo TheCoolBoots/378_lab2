@@ -9,15 +9,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Animated
 {
     private float delay = 50;
-    public boolean invincible = false;
     // Direction is set when the player moves and indicates which way is forward. Used to control which direction the bullets shoot
     private String direction = "N";
     
-    public boolean tripleShot = false;
+    public static int gunLevel = 0;
     private String[] bulletDirections = {"N", "NW", "W", "SW", "S", "SE", "E", "NE"};
     
     public Player() {
         super();
+        
+        gunLevel = 0;
         
         this.footstepSounds = new GreenfootSound[2];
         this.footstepSounds[0] = new GreenfootSound("leftFootstep.mp3");
@@ -43,14 +44,27 @@ public class Player extends Animated
             // Get the number of bullets, get all the proper directions,
             //  shoot all bullets in said directions
             int numBullets = 1;
-            if (tripleShot) {
+            if (gunLevel >= 1) {
                 numBullets = 3;
             }
             
             String[] directions = new String[numBullets];
             directions = getTripleShotDirections();
-            for (int i = 0; i < directions.length; i++) {
-                getWorld().addObject(new Bullet(directions[i]), getX(), getY());
+            if(gunLevel < 2){
+                for (int i = 0; i < numBullets; i++) {
+                    getWorld().addObject(new Bullet(directions[i]), getX(), getY());
+                }
+            }
+            // added a triple shot
+            else if(directions[0] == "N" || directions[0] == "S"){
+                getWorld().addObject(new Bullet(directions[0]), getX()+20, getY());
+                getWorld().addObject(new Bullet(directions[0]), getX()-20, getY());
+                getWorld().addObject(new Bullet(directions[0]), getX(), getY());
+            }
+            else{
+                getWorld().addObject(new Bullet(directions[0]), getX(), getY()+20);
+                getWorld().addObject(new Bullet(directions[0]), getX(), getY()-20);
+                getWorld().addObject(new Bullet(directions[0]), getX(), getY());
             }
             delay = 0;
         }
