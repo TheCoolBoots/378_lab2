@@ -80,6 +80,10 @@ public class Player extends Animated
         if (Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")){
             if(getX() >= 5){
                 setLocation(getX()-5, getY());
+                Actor b = getOneIntersectingObject(rocks.class);
+                if (b != null){
+                    setLocation(getX()+5, getY());
+                }
             }
             // Actor b = getOneIntersectingObject(debree.class);
             // Actor c = getOneIntersectingObject(house.class);
@@ -94,6 +98,10 @@ public class Player extends Animated
         if (Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")){
             if(getX() <= 1195){
                 setLocation(getX()+5, getY());
+                Actor b = getOneIntersectingObject(rocks.class);
+                if (b != null){
+                    setLocation(getX()-5, getY());
+                }
             }
             // Actor b = getOneIntersectingObject(debree.class);
             // Actor c = getOneIntersectingObject(house.class);
@@ -108,6 +116,10 @@ public class Player extends Animated
         if (Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w")){
             if (getY() >= 5){
                 setLocation(getX(), getY()-5);
+                Actor b = getOneIntersectingObject(rocks.class);
+                if (b != null){
+                    setLocation(getX(), getY() + 5);
+                }
             }
             // Actor b = getOneIntersectingObject(debree.class);
             // Actor c = getOneIntersectingObject(house.class);
@@ -122,6 +134,10 @@ public class Player extends Animated
         if (Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s")){
             if (getY() <= 1195){
                 setLocation(getX(), getY()+5);
+                Actor b = getOneIntersectingObject(rocks.class);
+                if (b != null){
+                    setLocation(getX(), getY() - 5);
+                }
             }
             // Actor b = getOneIntersectingObject(debree.class);
             // Actor c = getOneIntersectingObject(house.class);
