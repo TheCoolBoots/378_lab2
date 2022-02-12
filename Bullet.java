@@ -117,7 +117,6 @@ public class Bullet extends Actor
                     getWorld().addObject(new HealthPowerup(), getX(), getY());
                     break;
                 case 1:
-                    System.out.println(Player.gunLevel);
                     if(Player.gunLevel < 3)
                         getWorld().addObject(new UpgradePowerup(), getX(), getY());
                     break;

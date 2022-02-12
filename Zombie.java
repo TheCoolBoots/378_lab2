@@ -51,43 +51,76 @@ public class Zombie extends Animated
         return Math.sqrt(Math.pow(actor.getX()-this.getX(), 2.0) + Math.pow(actor.getY()-this.getY(), 2));
     }
     
+    private int framesPerDirection = 100;
+    private int currentFrames = 100;
+    private double dirRandomChance = .1;
+    
     private int getTargetDirection(){
-        double playerDist = getDistToActor(playerRef);
-        double targetDist = getDistToActor(targetRef);
-        
-        int xDist;
-        int yDist;
-        
-        if(targetDist < playerDist){
-            // move towards target
-            xDist = this.getX() - targetRef.getX();
-            yDist = this.getY() - targetRef.getY();
-        }
-        else{
-            // move towards player
-            xDist = this.getX() - playerRef.getX();
-            yDist = this.getY() - playerRef.getY();
-        }
-        
-        // System.out.println(yDist);
-        // need to have moveThreshold or else zombie will only move left/right if on exact same y-coord as target
-        if(Math.abs(xDist) < moveThreshold || Math.abs(xDist) > Math.abs(yDist) && Math.abs(yDist) > moveThreshold){
-            // zombie will be moving up or down
-            if(yDist > 0){
-                return 0;
+        if(framesPerDirection == currentFrames){
+            double playerDist = getDistToActor(playerRef);
+            double targetDist = getDistToActor(targetRef);
+            
+            int xDist;
+            int yDist;
+            
+            if(targetDist < playerDist){
+                // move towards target
+                xDist = this.getX() - targetRef.getX();
+                yDist = this.getY() - targetRef.getY();
             }
             else{
-                return 2;
+                // move towards player
+                xDist = this.getX() - playerRef.getX();
+                yDist = this.getY() - playerRef.getY();
+            }
+            currentFrames = 0;
+            // System.out.println(yDist);
+            // need to have moveThreshold or else zombie will only move left/right if on exact same y-coord as target
+            if(Math.abs(xDist) < moveThreshold || Math.abs(xDist) > Math.abs(yDist) && Math.abs(yDist) > moveThreshold){
+                // there is a chance it will move left or right
+                if(rand.nextDouble() < dirRandomChance){
+                    if(yDist > 0){
+                        return 0;
+                    }
+                    else{
+                        return 2;
+                    }
+                }
+                // zombie will be moving up or down
+                else{
+                    if(xDist > 0){
+                        return 3;
+                    }
+                    else{
+                        return 1;
+                    }  
+                }
+
+            }
+            else{
+                // there is a chance it will move up or down
+                if(rand.nextDouble() < dirRandomChance){
+                    if(xDist > 0){
+                        return 3;
+                    }
+                    else{
+                        return 1;
+                    }
+                }
+                // zombie will be moving left or right
+                else{
+                    if(yDist > 0){
+                        return 0;
+                    }
+                    else{
+                        return 2;
+                    }
+                }
             }
         }
         else{
-            // zombie will be moving left or right
-            if(xDist > 0){
-                return 3;
-            }
-            else{
-                return 1;
-            }
+            currentFrames += 1;
+            return getDirection();
         }
     }
     

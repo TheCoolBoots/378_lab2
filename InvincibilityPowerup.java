@@ -7,6 +7,7 @@ public class InvincibilityPowerup extends Actor
     
     private boolean active = false;
     private static GreenfootImage powerupImg = null;
+    private static GreenfootSound soundEffect = null;
     
     public InvincibilityPowerup()
     {
@@ -15,6 +16,13 @@ public class InvincibilityPowerup extends Actor
             powerupImg.scale(40, 20);
         }
         setImage(powerupImg);
+        
+                
+        if(soundEffect == null){
+            soundEffect = new GreenfootSound("shieldSound.mp3");
+            soundEffect.setVolume(40);
+        }
+        soundEffect.play();
     }
 
     public void act(){
@@ -46,5 +54,6 @@ public class InvincibilityPowerup extends Actor
         getWorld().addObject(dogShield, 0, 0);
         // need to pass in reference to target somehow
         setImage("alpha.png");
+        soundEffect.play();
     }
 }

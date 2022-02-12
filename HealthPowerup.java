@@ -4,6 +4,7 @@ import java.util.List;
 public class HealthPowerup extends Actor
 {
     private static GreenfootImage healthImage = null;
+    private static GreenfootSound soundEffect = null;
     
     public HealthPowerup(){
         if(healthImage == null){
@@ -11,6 +12,12 @@ public class HealthPowerup extends Actor
             healthImage.scale(30, 30);
         }
         setImage(healthImage);
+        
+        if(soundEffect == null){
+            soundEffect = new GreenfootSound("healSoundEffect.mp3");
+            soundEffect.setVolume(40);
+        }
+        soundEffect.play();
     }
     
     public void act(){
@@ -22,6 +29,7 @@ public class HealthPowerup extends Actor
     public void handlePlayerCollision(){
         ScoreTracker.playerHealth = 3;
         ScoreTracker.targetHealth = 3;
+        soundEffect.play();
         getWorld().removeObject(this);
     }
 }
