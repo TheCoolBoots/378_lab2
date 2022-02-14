@@ -33,7 +33,7 @@ public class Zombie extends Animated
         this.rootImgFP = "Zombie";
         this.numFrames = 2;
         this.numDirections = 4;
-        this.moveSpeed = 2;
+        this.moveSpeed = 1;
         this.playerRef = player;
         this.targetRef = target;
         this.frameSkip = 30;
