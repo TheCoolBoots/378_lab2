@@ -109,5 +109,13 @@ public class MyWorld extends World
         addObject(rocks3,263,644);
         rocks rocks4 = new rocks();
         addObject(rocks4,922,635);
+        rocks rocks5 = new rocks();
+        addObject(rocks5,279,213);
+        rocks rocks6 = new rocks();
+        addObject(rocks6,278,701);
+        rocks rocks7 = new rocks();
+        addObject(rocks7,963,220);
+        rocks rocks8 = new rocks();
+        addObject(rocks8,960,686);
     }
 }
