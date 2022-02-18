@@ -11,9 +11,13 @@ public class Player extends Animated
     private float delay = 50;
     // Direction is set when the player moves and indicates which way is forward. Used to control which direction the bullets shoot
     private String direction = "N";
+    private String shootDirection = "W";
     
     public static int gunLevel = 0;
     private String[] bulletDirections = {"N", "NW", "W", "SW", "S", "SE", "E", "NE"};
+    
+    private boolean shooting = false;
+    private float shootingTimer = 0;
     
     public Player() {
         super();
@@ -40,7 +44,10 @@ public class Player extends Animated
         super.act(); 
         
         // Delay is put in place so players cannot spam bullets
-        if (delay >= 15 && Greenfoot.isKeyDown("space")) {
+        if (delay >= 15 && checkShooting()) {
+            shooting = true;
+            shootingTimer = 0;
+            
             // Get the number of bullets, get all the proper directions,
             //  shoot all bullets in said directions
             int numBullets = 1;
@@ -50,24 +57,26 @@ public class Player extends Animated
             
             String[] directions = new String[numBullets];
             directions = getTripleShotDirections();
-            if(gunLevel < 2){
-                for (int i = 0; i < numBullets; i++) {
-                    getWorld().addObject(new Bullet(directions[i]), getX(), getY());
-                }
+            for (int i = 0; i < numBullets; i++) {
+                getWorld().addObject(new Bullet(directions[i]), getX(), getY());
             }
             // added a triple shot
-            else if(directions[0] == "N" || directions[0] == "S"){
-                getWorld().addObject(new Bullet(directions[0]), getX()+20, getY());
-                getWorld().addObject(new Bullet(directions[0]), getX()-20, getY());
-                getWorld().addObject(new Bullet(directions[0]), getX(), getY());
-            }
-            else{
-                getWorld().addObject(new Bullet(directions[0]), getX(), getY()+20);
-                getWorld().addObject(new Bullet(directions[0]), getX(), getY()-20);
-                getWorld().addObject(new Bullet(directions[0]), getX(), getY());
-            }
+            //else if(directions[0] == "N" || directions[0] == "S"){
+            //    getWorld().addObject(new Bullet(directions[0]), getX()+20, getY());
+            //    getWorld().addObject(new Bullet(directions[0]), getX()-20, getY());
+            //    getWorld().addObject(new Bullet(directions[0]), getX(), getY());
+            //}
+            //else{
+            //    getWorld().addObject(new Bullet(directions[0]), getX(), getY()+20);
+            //    getWorld().addObject(new Bullet(directions[0]), getX(), getY()-20);
+            //    getWorld().addObject(new Bullet(directions[0]), getX(), getY());
+            //}
             delay = 0;
         }
+        
+        if (shooting && shootingTimer >= 15)
+            shooting = false;
+        else shootingTimer++;
         
         delay++;
         
@@ -77,7 +86,7 @@ public class Player extends Animated
     private void Movement() {
         boolean moving = false;
         
-        if (Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")){
+        if (Greenfoot.isKeyDown("a")){
             if(getX() >= 5){
                 setLocation(getX()-5, getY());
                 Actor b = getOneIntersectingObject(rocks.class);
@@ -92,10 +101,10 @@ public class Player extends Animated
             //}
             
             direction = "W";
-            this.setDirection(1);
+            if (!shooting) this.setDirection(1);
             moving =true;
         }
-        if (Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")){
+        if (Greenfoot.isKeyDown("d")){
             if(getX() <= 1195){
                 setLocation(getX()+5, getY());
                 Actor b = getOneIntersectingObject(rocks.class);
@@ -110,10 +119,10 @@ public class Player extends Animated
             //}
             
             direction = "E";
-            this.setDirection(0);
+            if (!shooting) this.setDirection(0);
             moving =true;
         }
-        if (Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w")){
+        if (Greenfoot.isKeyDown("w")){
             if (getY() >= 5){
                 setLocation(getX(), getY()-5);
                 Actor b = getOneIntersectingObject(rocks.class);
@@ -127,11 +136,11 @@ public class Player extends Animated
             //    setLocation(getX(), getY() + 5);
             //}
             
-            idleToWalk();
+            if (!shooting) idleToWalk();
             direction = "N";
             moving =true;
         }
-        if (Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s")){
+        if (Greenfoot.isKeyDown("s")){
             if (getY() <= 1195){
                 setLocation(getX(), getY()+5);
                 Actor b = getOneIntersectingObject(rocks.class);
@@ -145,7 +154,7 @@ public class Player extends Animated
             //    setLocation(getX(), getY() - 5);
             //}
             
-            idleToWalk();
+            if (!shooting) idleToWalk();
             direction = "S";
             moving =true;
         }
@@ -154,24 +163,18 @@ public class Player extends Animated
         
         diagonalShots();
     }
-    
-    // This method will check the bullet directions to make sure that the
-    //  bullets can be shot at diagonal angles
+
     private void diagonalShots() {
-        if ((Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) && 
-        (Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w"))) {
+        if (Greenfoot.isKeyDown("a") && Greenfoot.isKeyDown("w")) {
             direction = "W";
         }
-        else if ((Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) && 
-        (Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s"))) {
+        else if (Greenfoot.isKeyDown("a") && Greenfoot.isKeyDown("s")) {
             direction = "W";
         }
-        else if ((Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) && 
-        (Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w"))) {
+        else if (Greenfoot.isKeyDown("d") && Greenfoot.isKeyDown("w")) {
             direction = "E";
         }
-        else if ((Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) && 
-        (Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s"))) {
+        else if (Greenfoot.isKeyDown("d") && Greenfoot.isKeyDown("s")) {
             direction = "E";
         }
     }
@@ -200,11 +203,11 @@ public class Player extends Animated
     private String[] getTripleShotDirections() {
         int index = 0;
         String[] directions = new String[3];
-        directions[0] = direction;
+        directions[0] = shootDirection;
         
         
         for (int i = 0; i < bulletDirections.length; i++) {
-            if (bulletDirections[i] == direction) {
+            if (bulletDirections[i] == shootDirection) {
                 index = i;
                 break;
             }
@@ -217,5 +220,56 @@ public class Player extends Animated
         directions[2] = bulletDirections[upperIndex];
         
         return directions;
+    }
+    
+    // Small method to check if player is pressing an arrow key to shoot
+    // Set shooting direction to direction desired
+    private boolean checkShooting() {
+        if (Greenfoot.isKeyDown("up")) {
+            shootDirection = "N";
+            if (Greenfoot.isKeyDown("left")) {
+                shootDirection = "NW";
+                this.setDirection(1);
+            }
+            else if (Greenfoot.isKeyDown("right")) {
+                shootDirection = "NE";
+                this.setDirection(2);
+            }
+            
+            return true;
+        }else if (Greenfoot.isKeyDown("down")) {
+            shootDirection = "S";
+            if (Greenfoot.isKeyDown("left")) {
+                shootDirection = "SW";
+                this.setDirection(1);
+            }
+            else if (Greenfoot.isKeyDown("right")) {
+                shootDirection = "SE";
+                this.setDirection(2);
+            }
+            
+            return true;
+        }else if (Greenfoot.isKeyDown("left")) {
+            shootDirection = "W";
+            
+            // Don't need to change animation directions because already facing shooting direction
+            if (Greenfoot.isKeyDown("up")) shootDirection = "NW";
+            else if (Greenfoot.isKeyDown("down")) shootDirection = "SW";
+            
+            this.setDirection(1);
+            
+            return true;
+        }else if (Greenfoot.isKeyDown("right")) {
+            shootDirection = "E";
+            
+            if (Greenfoot.isKeyDown("up")) shootDirection = "NE";
+            else if (Greenfoot.isKeyDown("down")) shootDirection = "SE";
+            
+            this.setDirection(0);
+            
+            return true;
+        }
+        
+        return false;
     }
 }
