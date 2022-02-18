@@ -39,10 +39,10 @@ public class startScreen extends World
         if(Greenfoot.isKeyDown("enter")){
             slide1 slide1 = new slide1();
             addObject(slide1,600,450);
-            Greenfoot.delay(600);
+            Greenfoot.delay(300);
             slide2 slide2 = new slide2();
             addObject(slide2,600,450);
-            Greenfoot.delay(500);
+            Greenfoot.delay(300);
             menuMusic.stop();
             Greenfoot.setWorld(new MyWorld());
         }

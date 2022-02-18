@@ -13,27 +13,40 @@ public class Zombie extends Animated
     private int framesPerDamagePlayer = 90;
     private int collisionFrameCounter = 0;
     
-    private GreenfootSound targetHurtSound;
-    private GreenfootSound neutralSound;
-    private GreenfootSound playerHurtSound;
+    private static GreenfootSound targetHurtSound = null;
+    private static GreenfootSound neutralSound = null;
+    private static GreenfootSound playerHurtSound = null;
+    private static GreenfootSound leftFootstep = null;
+    private static GreenfootSound rightFootstep = null;
+    
     private Random rand;
     
     public Zombie(Player player, Target target, ScoreTracker scoreTracker){
         super();
         
+        if(targetHurtSound == null)
+            targetHurtSound = new GreenfootSound("dogHurt.mp3");
+        if(neutralSound == null)
+            neutralSound = new GreenfootSound("zombie.mp3");
+        if(playerHurtSound == null)
+            playerHurtSound = new GreenfootSound("playerHurt.mp3");
+        if(leftFootstep == null)
+            leftFootstep = new GreenfootSound("leftFootstep.mp3");
+        if(rightFootstep == null)
+            rightFootstep = new GreenfootSound("rightFootstep.mp3");
+            
         // configure the animated superclass
         this.footstepSounds = new GreenfootSound[2];
-        this.footstepSounds[0] = new GreenfootSound("leftFootstep.mp3");
-        this.footstepSounds[0].setVolume(50);
-        this.footstepSounds[1] = new GreenfootSound("rightFootstep.mp3");
-        this.footstepSounds[1].setVolume(50);
-        this.playerHurtSound = new GreenfootSound("playerHurt.mp3");
+        this.footstepSounds[0] = leftFootstep;
+        this.footstepSounds[0].setVolume(30);
+        this.footstepSounds[1] = rightFootstep;
+        this.footstepSounds[1].setVolume(30);
         this.playerHurtSound.setVolume(60);
         this.scoreTrackerRef = scoreTracker;
         this.rootImgFP = "Zombie";
         this.numFrames = 2;
         this.numDirections = 4;
-        this.moveSpeed = 2;
+        this.moveSpeed = 1;
         this.playerRef = player;
         this.targetRef = target;
         this.frameSkip = 30;
@@ -42,8 +55,6 @@ public class Zombie extends Animated
         // load the animated superclass images
         super.loadAllImages();
         
-        targetHurtSound = new GreenfootSound("dogHurt.mp3");
-        neutralSound = new GreenfootSound("zombie.mp3");
         rand = new Random();
     }
     
